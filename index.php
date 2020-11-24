@@ -15,7 +15,8 @@ $client = new \Vonage\Client(
 
 $app = AppFactory::create();
 
-function getCurrentUrl($request) {
+function getCurrentUrl($request)
+{
     $uri = $request->getUri();
 
     $url = $uri->getScheme() . '://' . $uri->getHost();
@@ -48,20 +49,6 @@ $app->get('/webhooks/answer', function (Request $request, Response $response) {
 
     return $response
         ->withHeader('Content-Type', 'application/json');
-});
-
-// Here for debugging
-$app->get('/webhooks/event', function (Request $request, Response $response, $args) {
-    var_dump($request->getQueryParams());
-
-    return $response->withStatus(200);
-});
-
-// Here for debugging
-$app->post('/webhooks/event', function (Request $request, Response $response, $args) {
-    var_dump($request->getParsedBody());
-
-    return $response->withStatus(200);
 });
 
 $app->get('/trigger/{id}/{position}', function (Request $request, Response $response, $args) use ($client) {
