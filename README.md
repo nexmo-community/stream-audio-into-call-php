@@ -1,5 +1,5 @@
 This is a supporting repo for the Nexmo blog post 
-[stream audio in to a call with PHP](#). See the blog post for a step by step 
+[stream audio in to a call with PHP](https://learn.vonage.com/blog/2019/04/12/play-audio-voice-call-php-dr). See the blog post for a step by step
 walkthrough and explanation of the code
 
 ### Quick Start
