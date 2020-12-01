@@ -9,7 +9,8 @@ require 'vendor/autoload.php';
 $client = new \Vonage\Client(
     new \Vonage\Client\Credentials\Keypair(
         file_get_contents('./private.key'),
-        'VONAGE_APPLICATION_ID'
+        // 'VONAGE_APPLICATION_ID'
+        '432553d6-51d4-4741-a32f-aae1247e1177'
     )
 );
 
@@ -49,6 +50,14 @@ $app->get('/webhooks/answer', function (Request $request, Response $response) {
 
     return $response
         ->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/webhooks/event', function (Request $request, Response $response) {
+    $params = $request->getQueryParams();
+
+    error_log('Call event status: ' . $params['status']);
+
+    return $response;
 });
 
 $app->get('/trigger/{id}/{position}', function (Request $request, Response $response, $args) use ($client) {

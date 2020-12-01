@@ -16,7 +16,6 @@ This repository is the complete example for the accompanying post at: [Stream Au
 
 - A phone number
 - [A Vonage account](https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=https://github.com/nexmo-community/stream-audio-into-call-php)
-- [Vonage Application](https://dashboard.nexmo.com/applications) and [Virtual phone number](https://dashboard.nexmo.com/buy-numbers)
 - [Nexmo-CLI](https://github.com/Nexmo/nexmo-cli)
 - [Composer](http://getcomposer.org/)
 - [Ngrok](https://learn.vonage.com/blog/2017/07/04/local-development-nexmo-ngrok-tunnel-dr)
@@ -25,10 +24,14 @@ This repository is the complete example for the accompanying post at: [Stream Au
 
 * Install dependencies - `composer install`
 * Run the application - `php -t . -S localhost:8000`
-* Expose your application to the internet - `ngrok http 8000`
-* Update your `answer_url` and `event_url` in your [Vonage application](https://dashboard.nexmo.com/applications)
-* Call your Vonage Number to hear the welcome message
-* Make a request to `<ngrok url>/trigger/<ID>/1` to play audio in to an active call.
+* Expose your application to the internet - `ngrok http 8000` (make a note of your ngrok URL, will look like: `https://abc12345.ngrok.io`)
+- Create a [Vonage Application](https://dashboard.nexmo.com/applications) and rent a [Virtual phone number](https://dashboard.nexmo.com/buy-numbers) (Save your private.key file in your project directory)
+* In your [Vonage application](https://dashboard.nexmo.com/applications) update the following two fields (replacing `<ngrok url>` with your ngrok url):
+    * `answer_url` to: `<ngrok url>/webhooks/answer`
+    * `event_url` to: `<ngrok url>/webhooks/event`
+* In `index.php` update `VONAGE_APPLICATION_ID` with your Vonage application ID.
+* Call your Vonage Number to hear the welcome message. Check your Terminal for the output: `Inbound call from ' . $params['from'] . ' - ID: ' . $params['uuid'])` where the `$params` values are actual values for your call. Make a note of the call ID (uuid)
+* Make a request to `<ngrok url>/trigger/<uuid>/1` to play audio in to an active call. (Replacing `<ngrok url>` with your ngrok url, and the `uuid` with your call ID returned in the previous step).
 
 ## Code of Conduct
 
