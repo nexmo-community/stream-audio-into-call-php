@@ -9,8 +9,7 @@ require 'vendor/autoload.php';
 $client = new \Vonage\Client(
     new \Vonage\Client\Credentials\Keypair(
         file_get_contents('./private.key'),
-        // 'VONAGE_APPLICATION_ID'
-        '432553d6-51d4-4741-a32f-aae1247e1177'
+        'VONAGE_APPLICATION_ID'
     )
 );
 
